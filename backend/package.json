@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --env-file=.env server.js",
-    "postinstall": "node -r module-alias/register"
+    "dev": "nodemon --env-file=.env server.js"
   },
   "keywords": [],
   "author": "",
