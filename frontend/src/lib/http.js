@@ -9,14 +9,17 @@ export async function signup({ name, username, email, password }) {
     password,
   });
 
-  const response = await fetch("http://localhost:3000/api/auth/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(credentials),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/auth/signup`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(credentials),
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while signing up");
@@ -35,14 +38,17 @@ export async function login({ email, password }) {
     password,
   });
 
-  const response = await fetch("http://localhost:3000/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(credentials),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(credentials),
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while logging in");
@@ -56,12 +62,15 @@ export async function login({ email, password }) {
 
 // Function for user logout
 export async function logout() {
-  const response = await fetch("http://localhost:3000/api/auth/logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/auth/logout`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while logging out");
@@ -79,11 +88,14 @@ export async function createPost({ caption, tags, image, location }) {
   formData.append("image", image);
   formData.append("location", location);
 
-  const response = await fetch("http://localhost:3000/api/posts", {
-    method: "POST",
-    credentials: "include",
-    body: formData,
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while creating the post");
@@ -103,11 +115,14 @@ export async function editPost({ postId, caption, tags, image, location }) {
   formData.append("image", image);
   formData.append("location", location);
 
-  const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-    method: "PUT",
-    credentials: "include",
-    body: formData,
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/${postId}`,
+    {
+      method: "PUT",
+      credentials: "include",
+      body: formData,
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while editing the post");
@@ -125,10 +140,13 @@ export async function getPostById({ postId }) {
     throw new Error("Post id is required");
   }
 
-  const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-    method: "GET",
-    credentials: "include",
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/${postId}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while getting post by id");
@@ -148,10 +166,13 @@ export async function deletePost({ postId }) {
     throw new Error("Post id is required");
   }
 
-  const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/${postId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while deleting the post");
@@ -170,7 +191,9 @@ export async function getRecentPosts({ limit }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/recent${limit ? `?limit=${limit}` : ""}`,
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/recent${
+      limit ? `?limit=${limit}` : ""
+    }`,
     {
       method: "GET",
       credentials: "include",
@@ -196,7 +219,9 @@ export async function toggleLikePost({ postId }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/${postId}/toggle-like`,
+    `${
+      import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL
+    }/api/posts/${postId}/toggle-like`,
     {
       method: "PUT",
       credentials: "include",
@@ -220,7 +245,9 @@ export async function toggleSavePost({ postId }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/${postId}/toggle-save`,
+    `${
+      import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL
+    }/api/posts/${postId}/toggle-save`,
     {
       method: "PUT",
       credentials: "include",
@@ -244,7 +271,9 @@ export async function getSavedPosts({ limit }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/saved${limit ? `?limit=${limit}` : ""}`,
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/saved${
+      limit ? `?limit=${limit}` : ""
+    }`,
     {
       method: "GET",
       credentials: "include",
@@ -274,7 +303,9 @@ export async function getUserPosts({ limit, userId }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/user/${userId}${limit ? `?${limit}` : ""}`,
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/user/${userId}${
+      limit ? `?limit=${limit}` : ""
+    }`,
     {
       method: "GET",
       credentials: "include",
@@ -300,7 +331,9 @@ export async function getRecentUsers({ limit }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/user/recent${limit ? `?limit=${limit}` : ""}`,
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/user/recent${
+      limit ? `?limit=${limit}` : ""
+    }`,
     {
       method: "GET",
       credentials: "include",
@@ -321,7 +354,7 @@ export async function getRecentUsers({ limit }) {
 
 export async function fetchPosts({ pageParam = null, limit = 9 }) {
   const response = await fetch(
-    `http://localhost:3000/api/posts${
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts${
       pageParam ? `?cursor=${pageParam}&limit=${limit}` : `?limit=${limit}`
     }`,
     {
@@ -347,14 +380,14 @@ export async function searchPost({ searchQuery, limit }) {
     throw new Error("Limit must be a positive number");
   }
 
-  if (!searchQuery || !searchQuery.trim() === "") {
+  if (!searchQuery || searchQuery.trim() === "") {
     throw new Error("Search query is required");
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/search?search=${searchQuery}${
-      limit ? `?limit=${limit}` : ""
-    }`,
+    `${
+      import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL
+    }/api/posts/search?search=${searchQuery}${limit ? `&limit=${limit}` : ""}`,
     {
       credentials: "include",
     }
@@ -373,10 +406,13 @@ export async function searchPost({ searchQuery, limit }) {
 }
 
 export async function fetchUsers() {
-  const response = await fetch(`http://localhost:3000/api/user`, {
-    method: "GET",
-    credentials: "include",
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/user`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while fetching users");
@@ -395,10 +431,13 @@ export async function getUserById({ userId }) {
     throw new Error("User id is required");
   }
 
-  const response = await fetch(`http://localhost:3000/api/user/${userId}`, {
-    method: "GET",
-    credentials: "include",
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/user/${userId}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     const error = new Error("An error occurred while getting user by id");
@@ -418,7 +457,7 @@ export async function getLikedPosts({ limit }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/posts/liked-posts${
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/posts/liked-posts${
       limit ? `?limit=${limit}` : ""
     }`,
     {
@@ -445,7 +484,9 @@ export async function toggleFollowUser({ userId }) {
   }
 
   const response = await fetch(
-    `http://localhost:3000/api/user/${userId}/toggle-follow`,
+    `${
+      import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL
+    }/api/user/${userId}/toggle-follow`,
     {
       method: "PUT",
       credentials: "include",
@@ -463,15 +504,13 @@ export async function toggleFollowUser({ userId }) {
 }
 
 export async function updateProfile({ name, bio, image }) {
-  console.log(image);
-
   const formData = new FormData();
   formData.append("name", name);
   formData.append("bio", bio);
   formData.append("image", image);
 
   const response = await fetch(
-    `http://localhost:3000/api/user/update-profile`,
+    `${import.meta.env.VITE_SNAPGRAM_BACKEND_API_URL}/api/user/update-profile`,
     {
       credentials: "include",
       method: "PUT",
@@ -479,9 +518,14 @@ export async function updateProfile({ name, bio, image }) {
     }
   );
 
-  const data = await response.json();
+  if (!response.ok) {
+    const error = new Error("An error occurred while updating the profile");
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
 
-  console.log(data);
+  const data = await response.json();
 
   return data.user;
 }
