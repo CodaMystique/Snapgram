@@ -1,12 +1,15 @@
 import path from "path";
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import cloudinary from "cloudinary";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";
 import postRoutes from "./routes/post.route.js";
 import userRoutes from "./routes/user.route.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
+
+dotenv.config();
 
 const app = express();
 
