@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --env-file=.env server.js"
+    "dev": "nodemon --env-file=.env backend/server.js",
+    "start": "node --env-file=.env backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +22,5 @@
     "mongoose": "^8.3.4",
     "multer": "^1.4.5-lts.1",
     "module-alias": "^2.2.2"
-  },
-  "_moduleAliases": {
-    "@": "./"
   }
 }
