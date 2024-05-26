@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://snapgram-frontend.netlify.app",
+    origin: ["https://snapgram-frontend.netlify.app"],
     credentials: true,
   })
 );
