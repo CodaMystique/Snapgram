@@ -16,6 +16,8 @@ function generateTokenAndSetCookie(userId, res) {
         ? oneDayInMilliseconds
         : sixHoursInMilliseconds,
     httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV !== "development", // Secure flag based on environment
   });
 }
 
